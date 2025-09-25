@@ -9,7 +9,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/NikaYz/Calculator.git'
+                git(
+                    url: 'https://github.com/NikaYz/Calculator.git',
+                    branch: 'main',
+                    credentialsId: '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'
+                )
             }
         }
 
