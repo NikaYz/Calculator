@@ -12,7 +12,7 @@ pipeline {
                 git(
                     url: 'https://github.com/NikaYz/Calculator.git',
                     branch: 'main',
-                    credentialsId: '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'
+                    credentialsId: 'jenkins-github'
                 )
             }
         }
