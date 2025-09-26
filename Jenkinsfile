@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker-agent' }
+    agent any
 
     tools {
         maven 'Maven3'  // Make sure Maven is installed in Jenkins
