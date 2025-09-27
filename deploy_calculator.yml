@@ -1,0 +1,22 @@
+---
+- name: Deploy Calculator Docker Container
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Ensure Docker is installed
+      package:
+        name: docker.io
+        state: present
+
+    - name: Pull latest Docker image
+      community.docker.docker_image:
+        name: nikayz/scientific-calculator
+        source: pull
+        tag: "1.0"
+
+    - name: Run Calculator container
+      community.docker.docker_container:
+        name: calculator
+        image: nikayz/scientific-calculator:1.0
+        state: started
+        restart_policy: unless-stopped
