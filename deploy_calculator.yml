@@ -1,6 +1,7 @@
 ---
 - name: Deploy Calculator Docker Container
   hosts: localhost
+  connection: local
   become: yes
   tasks:
     - name: Ensure Docker is installed
