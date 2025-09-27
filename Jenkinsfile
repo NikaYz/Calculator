@@ -60,7 +60,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dckr_pat_y87w5YbPf2Z3YetzYiKBejPFSM4') {
                         sh "docker tag ${IMAGE_NAME} nikayz/${IMAGE_NAME}"
                         sh "docker push nikayz/${IMAGE_NAME}"
                     }
