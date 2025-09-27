@@ -45,6 +45,7 @@ public class Calculator{
     }
 
     public static void main(String[] args){
+        
         Scanner sc = new Scanner(System.in);
         while(true){
             System.out.println("Menu driven interface for basic calculator: ");
@@ -54,6 +55,11 @@ public class Calculator{
             System.out.println("4. Power");
             System.out.println("5. Exit");
             System.out.println("Enter operaion number which you need to perform:");
+            if (!sc.hasNextInt()) {
+                System.out.println("No input available. Exiting.");
+                break;
+            }
+
             int ch = sc.nextInt();
             switch(ch){
                 case 1:
