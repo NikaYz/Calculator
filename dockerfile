@@ -1,6 +1,5 @@
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 # Set working directory
-# set
 WORKDIR /app
 
 # Copy Maven project files
