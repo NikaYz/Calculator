@@ -70,7 +70,7 @@ pipeline {
         
         stage('Deploy with Ansible') {
             steps {
-                sh 'ansible-playbook -i localhost, deploy_calculator.yml'
+                sh 'ansible-playbook -i deployment/inventory deployement/deploy_calculator.yml'
             }
         }
     }
