@@ -28,3 +28,8 @@
       shell: |
         docker run nikayz/scientific-calculator:1.0 \
         /bin/bash -c "echo -e '1\n16\n2\n5\n4\n2\n3\n5\n' | java -jar target/CalculatorProject-1.0-SNAPSHOT.jar"
+      register: calc_output
+      
+    - name: Show Calculator Output
+      debug:
+        msg: "{{ calc_output.stdout }}"
