@@ -1,8 +1,10 @@
 ---
 - name: Deploy Calculator Docker Container
-  hosts: localhost
+  hosts: all
   connection: local
   become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Ensure Docker is installed
       package:
@@ -14,7 +16,8 @@
         name: nikayz/scientific-calculator
         source: pull
         tag: "1.0"
-
+    # - name: Running container
+    #   shell: docker run -it -d --name calculator nikayz/scientific-calculator:1.0
     - name: Run Calculator container
       community.docker.docker_container:
         name: calculator
