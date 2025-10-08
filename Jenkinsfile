@@ -80,32 +80,14 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
         success {
-            echo '✅ Build, Docker image, and tests successful!'
-            emailext(
-                to: 'adisaraf7373@gmail.com',
-                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                <h3>Build Successful!</h3>
-                <p>Project: ${env.JOB_NAME}<br>
-                Build Number: ${env.BUILD_NUMBER}<br>
-                <a href="${env.BUILD_URL}">Click here for build logs</a></p>
-                """,
-                mimeType: 'text/html'
-            )
+            mail to: 'yourteam@example.com',
+                 subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build succeeded! Check details: ${env.BUILD_URL}"
         }
         failure {
-            echo '❌ Build or Docker stage failed!'
-            emailext(
-                to: 'adisaraf7373@gmail.com',
-                subject: "❌ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                <h3>Build Failed!</h3>
-                <p>Project: ${env.JOB_NAME}<br>
-                Build Number: ${env.BUILD_NUMBER}<br>
-                <a href="${env.BUILD_URL}">View details here</a></p>
-                """,
-                mimeType: 'text/html'
-            )
+            mail to: 'yourteam@example.com',
+                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build failed! Check details: ${env.BUILD_URL}"
         }
     }
 }
