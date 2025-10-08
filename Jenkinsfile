@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'  // Make sure Maven is installed in Jenkins
-        jdk 'OpenJDK11' // Or JDK17 if your project uses Java 17
+        maven 'Maven3'
+        jdk 'OpenJDK11'
     }
 
     environment {
@@ -80,61 +80,32 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
         success {
-            echo 'Build, Docker image, and tests successful!'
+            echo '✅ Build, Docker image, and tests successful!'
+            emailext(
+                to: 'yourteam@example.com',
+                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                <h3>Build Successful!</h3>
+                <p>Project: ${env.JOB_NAME}<br>
+                Build Number: ${env.BUILD_NUMBER}<br>
+                <a href="${env.BUILD_URL}">Click here for build logs</a></p>
+                """,
+                mimeType: 'text/html'
+            )
         }
         failure {
-            echo 'Build or Docker stage failed!'
+            echo '❌ Build or Docker stage failed!'
+            emailext(
+                to: 'yourteam@example.com',
+                subject: "❌ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                <h3>Build Failed!</h3>
+                <p>Project: ${env.JOB_NAME}<br>
+                Build Number: ${env.BUILD_NUMBER}<br>
+                <a href="${env.BUILD_URL}">View details here</a></p>
+                """,
+                mimeType: 'text/html'
+            )
         }
     }
 }
-
-// pipeline {
-//     agent any
-
-//     tools {
-//         maven 'Maven3'  // Make sure Maven is installed in Jenkins
-//         jdk 'OpenJDK11' // Make sure JDK is installed in Jenkins
-//     }
-
-//     stages {
-//         stage('Checkout') {
-//             steps {
-//                 git(
-//                     url: 'https://github.com/NikaYz/Calculator.git',
-//                     branch: 'main',
-//                     credentialsId: 'jenkins-github'
-//                 )
-//             }
-//         }
-
-//         stage('Build') {
-//             steps {
-//                 sh 'mvn clean compile'
-//             }
-//         }
-
-//         stage('Test') {
-//             steps {
-//                 sh 'mvn test'
-//             }
-//         }
-
-//         stage('Package') {
-//             steps {
-//                 sh 'mvn package'
-//             }
-//         }
-//     }
-
-//     post {
-//         always {
-//             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-//         }
-//         success {
-//             echo 'Build and tests successful!'
-//         }
-//         failure {
-//             echo 'Build or tests failed!'
-//         }
-//     }
-// }
