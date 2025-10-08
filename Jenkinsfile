@@ -80,12 +80,12 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
         success {
-            mail to: 'yourteam@example.com',
+            mail to: 'adisaraf7373@gmail.com',
                  subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "Build succeeded! Check details: ${env.BUILD_URL}"
         }
         failure {
-            mail to: 'yourteam@example.com',
+            mail to: 'adisaraf7373@gmail.com',
                  subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "Build failed! Check details: ${env.BUILD_URL}"
         }
