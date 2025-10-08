@@ -82,7 +82,7 @@ pipeline {
         success {
             echo '✅ Build, Docker image, and tests successful!'
             emailext(
-                to: 'yourteam@example.com',
+                to: 'adisaraf7373@gmail.com',
                 subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                 <h3>Build Successful!</h3>
@@ -96,7 +96,7 @@ pipeline {
         failure {
             echo '❌ Build or Docker stage failed!'
             emailext(
-                to: 'yourteam@example.com',
+                to: 'adisaraf7373@gmail.com',
                 subject: "❌ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                 <h3>Build Failed!</h3>
