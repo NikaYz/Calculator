@@ -50,13 +50,11 @@ pipeline {
         stage('Run Docker Image') {
             steps {
                 script {
-                    // Optional: run the image in non-interactive mode to verify it works
                     sh "docker run --rm ${IMAGE_NAME} java -jar target/CalculatorProject-1.0-SNAPSHOT.jar"
                 }
             }
         }
 
-        // Optional stage: push to Docker Hub
         stage('Push Docker Image') {
             steps {
                 script {
